@@ -12,7 +12,8 @@ var config = {
 
 var pool = new pg.Pool(config);
 
-router.get('/', function(req, res){ //GETTING tasks FROM DB
+//GETTING tasks FROM DB
+router.get('/', function(req, res){
   pool.connect(function(errorConnectingToDatabase, db, done){
     if(errorConnectingToDatabase) {
       console.log('Error connecting to the database.');
