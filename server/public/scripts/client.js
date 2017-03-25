@@ -2,8 +2,14 @@ $(document).ready(function(){
   console.log("jQuery sourced");
 
 getTasksFromDB();
+displayTasks();
 
 });//end document ready
+
+function displayTasks(response){
+  console.log("displayTasks working");
+  console.log(response);
+}
 
 function getTasksFromDB(){
   $.ajax ({
@@ -14,3 +20,8 @@ function getTasksFromDB(){
     }
   });//end of ajax
 }//end of getTasksFromDB
+
+function displayTasks(response){
+  console.log("displayTasks working");
+  console.log(response);
+}
