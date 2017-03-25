@@ -21,26 +21,22 @@ function getTasksFromDB(){
 
 }//end of getTasksFromDB
 
-                        // function displayBooks(response) {
-                        //   console.log("client.js line 2 displayBooks");
-                        //   console.log(response);
-                        //   $('#books').empty();
-                        //   for(var i = 0; i < response.length; i++) {
-                        //     var book = response[i];
-                        //     $('#books').append('<tr></tr>');
-                        //     var $el = $('#books').children().last();
-                        //     $el.append('<td>' + book.id + '</td>');
-                        //     $el.append('<td>' + book.author + '</td>');
-                        //     $el.append('<td>' + book.title + '</td>');
-                        //     if(book.year !== null){
-                        //       $el.append('<td>' + book.year + '</td>');
-                        //     }
-                        //     if(book.publisher !== null){
-                        //       $el.append('<td>' + book.publisher + '</td>');
-                        //     }
-                        //       // $el.append('<button class = delete>'Delete'</button>');
-                        // }//end for loop
-                        // }//end displayBooks
+$('#tasksTable').on('submit', function(event){
+event.preventDefault();
+console.log($('#newTask').val());
+$.ajax({
+type: "POST",
+url: "tasklist/addTask",
+data: {newTask: $('#newTask').val()},
+success: function(response) {
+console.log("what's tasklist response");
+console.log(response);// Refresh our data
+displayTasks(response);
+
+}//end success function
+});//end ajax POST
+// this.reset();
+});//end .on Submit
 
 function displayTasks(response){
   console.log("displayTasks working");
@@ -53,6 +49,12 @@ function displayTasks(response){
         var $el = $('#tasksTable').children().last();
         // $el.append('<td>' + task.id + '</td>');
         $el.append('<td>' + task.list_item + '</td>');
-        $el.append('<td>' + task.completed + '</td>');
-  }
-}
+        // $el.append('<td>' + task.completed + '</td>');
+        if(task.completed === false){
+          $el.append('<button class = noCompleted>Not Complete</button>');
+        } else  {
+        $el.append('<button class = yesCompleted>Complete</button>');
+        }
+        $el.append('<button class = delete>Delete</button>');
+  }//end of for loop
+    }//end of displayTasks

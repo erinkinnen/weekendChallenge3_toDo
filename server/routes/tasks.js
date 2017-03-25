@@ -34,4 +34,30 @@ router.get('/', function(req, res){
   });
 });//END OF ROUTER.GET
 
+router.post('/addTask', function(req, res){
+  console.log(req.body);
+  var newTask = req.body.list_item;
+
+  // INSERT INTO "books" ("author", "title") VALUES ('David Mitchel','Cloud Atlas');
+  pool.connect(function(errorConnectingToDatabase, db, done){
+    if(errorConnectingToDatabase) {
+      console.log('Error connecting to the database.');
+      res.send(500);
+    } else {
+      // We connected!!!!
+      db.query('INSERT INTO "to_do_list" ("list_item")' +
+               ' VALUES ($1);',
+               [list_item], function(queryError, result){
+        done();
+        if(queryError) {
+          console.log('Error making query.');
+          res.send(500);
+        } else {
+          res.sendStatus(201);
+        }
+      });
+    }
+  });
+});//END OF ROUTER.POST
+
 module.exports = router;
