@@ -4,14 +4,18 @@
     <meta charset="utf-8">
     <script type="text/javascript" src="vendors/jquery.js"></script>
     <script type="text/javascript" src="scripts/client.js"></script>
+    <link rel="stylesheet" href="views/style.css">
+
+</script>
     <title>To Do</title>
   </head>
   <body>
     <h1>Things To Do</h1>
 
     <form class="todo">
+      <h3 id='formTitle'>Add a task</h3>
       <input type="text" name="newTask" value="newTask" data-task="newTask" id="newTask">
-      <input type="text" name="completeStatus" value="completeStatus" data-task="completeStatus" id="completeStatus">
+      <!-- <input type="text" name="completeStatus" value="completeStatus" data-task="completeStatus" id="completeStatus"> -->
       <input type="submit" value="submit">
     </form>
 
@@ -21,7 +25,7 @@
           <!-- <th>ID</th> -->
           <th>Task</th>
           <th>Completed</th>
-          <th>Delete</th>
+          <!-- <th>Delete</th> -->
 
 
         </tr>

@@ -1,0 +1,21 @@
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 40px;
+  color: #034bbf;
+}
+
+h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  color: #034bbf;
+}
+
+thead {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  color: #034bbf;
+}
+
+body {
+  background-color: #f9f6f2;
+}

@@ -16,14 +16,16 @@ function getTasksFromDB(){
             var $el = $('#tasksTable').children().last();
             // $el.append('<td>' + task.id + '</td>');
             $el.append('<td>' + task.list_item + '</td>');
+            $el.append('<input type="checkbox" name="completeCheckbox" />');
             // $el.append('<td>' + task.completed + '</td>');
-            if(task.completed === false){
-              $el.append('<button class = noCompleted>Not Complete</button>');
-            } else  {
-            $el.append('<button class = yesCompleted>Complete</button>');
-            }
+            // if(task.completed === false){
+            //   $el.append('<button class = noCompleted>Not Complete</button>');
+            // } else  {
+            // $el.append('<button class = yesCompleted>Complete</button>');
+            // }
             $el.append('<td><button class="delete" data-task='+
-                      newTask.id + '>Delete</button></td>');
+                      task.id + '>Delete</button></td>');
+                      console.log(task.id);
       }//end of for loop
     }
 
@@ -48,7 +50,7 @@ function addEventListeners() {
     //new task object to send to db
     var taskToSend = {
       newTask: $(newTask).val(),
-      completeStatus: $(completeStatus).val()
+      completeStatus: false
     };
     console.log(taskToSend);
     //ajax post to send to db
