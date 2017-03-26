@@ -60,4 +60,30 @@ router.post('/addTask', function(req, res){
   });
 });//END OF ROUTER.POST
 
+router.delete('/delete/:id', function(req,res) {
+  var id = parseInt(req.params.id);
+  // DELETE FROM "books" WHERE "id" = 47;
+  pool.connect(function(errorConnectingToDatabase,db,done) {
+    if(errorConnectingToDatabase) {
+      console.log('Error connecting to the database');
+      res.send(500);
+    } else {
+      // We connected
+      db.query('DELETE FROM "to_do_list" WHERE "id" = $1',[id], function(queryError,result) {
+
+        // result is the result from our query
+        done(); // releases the connection we have to the pool
+        if (queryError) {
+          console.log('Error making query');
+          res.send(500);
+        } else {
+          //console.log(result);
+          res.sendStatus(200);
+        }
+      });
+    }
+  });
+});
+
+
 module.exports = router;
