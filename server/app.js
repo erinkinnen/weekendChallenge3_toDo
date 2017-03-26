@@ -8,7 +8,7 @@ var tasks = require('./routes/tasks.js');
 app.use(express.static("server/public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use("/tasklist", tasks);
+app.use("/tasks", tasks);
 
 
 

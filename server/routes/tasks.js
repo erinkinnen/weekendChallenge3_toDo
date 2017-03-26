@@ -36,8 +36,9 @@ router.get('/', function(req, res){
 
 router.post('/addTask', function(req, res){
   console.log(req.body);
-  var newTask = req.body.list_item;
-
+  var id = parseInt(req.body.id);
+  var newTask = req.body.newTask;
+  var completeStatus = req.body.completeStatus;
   // INSERT INTO "books" ("author", "title") VALUES ('David Mitchel','Cloud Atlas');
   pool.connect(function(errorConnectingToDatabase, db, done){
     if(errorConnectingToDatabase) {
@@ -45,9 +46,8 @@ router.post('/addTask', function(req, res){
       res.send(500);
     } else {
       // We connected!!!!
-      db.query('INSERT INTO "to_do_list" ("list_item")' +
-               ' VALUES ($1);',
-               [list_item], function(queryError, result){
+      db.query('INSERT INTO "to_do_list" ("list_item", "completed") VALUES ($1,$2);',
+               [newTask, completeStatus], function(queryError, result){
         done();
         if(queryError) {
           console.log('Error making query.');
