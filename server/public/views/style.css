@@ -11,6 +11,10 @@ h3 {
   color: #034bbf;
 }
 
+.completedClass {
+  color: red;
+}
+
 .todo {
   font-family: 'Montserrat', sans-serif;
 }
@@ -38,14 +42,14 @@ tr {
   font-family: 'Montserrat', sans-serif;
   height: 40px;
   width: 150px;
-  border-color: #034bbf;
-  border-bottom: 2px;
+  /*border-color: #034bbf;*/
+  /*border-bottom: 2px;*/
 }
 
-table{
+/*table{
   border-style: groove;
   border-color: #034bbf;
-}
+}*/
 
 body {
   background-color: #f9f6f2;

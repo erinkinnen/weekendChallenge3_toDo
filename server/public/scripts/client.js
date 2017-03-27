@@ -118,6 +118,7 @@ function addEventListeners() {
 
     var taskId = $(this).data('task');
     console.log('Complete Task: ', taskId );
+    // $('#tasksTable').toggleClass(completedClass, addOrRemove);
     $.ajax({
       type: "PUT",
       url: '/tasks/update/' + taskId,
