@@ -60,6 +60,36 @@ router.post('/addTask', function(req, res){
   });
 });//END OF ROUTER.POST
 
+router.put('/update/:taskId', function(req,res) {
+    var id = req.params.taskId;
+    // var completed = req.body.completed;
+    console.log(id);
+    // console.log(completed);
+    pool.connect(function(errorConnectingToDatabase,db,done) {
+      if(errorConnectingToDatabase) {
+        console.log('Error connecting to the database');
+        res.send(500);
+      } else {
+        // We connected
+        db.query("UPDATE to_do_list SET completed ='TRUE' WHERE id = $1;",
+        [id], function(queryError,result) {
+
+          // result is the result from our query
+          done(); // releases the connection we have to the pool
+          if (queryError) {
+            console.log('Error making query');
+            res.sendStatus(500);
+          } else {
+            //console.log(result);
+            res.sendStatus(201); // succesful insert status
+          } //else
+        }); //db.query
+      }//else
+    });
+});
+
+
+
 router.delete('/delete/:id', function(req,res) {
   var id = parseInt(req.params.id);
   // DELETE FROM "books" WHERE "id" = 47;

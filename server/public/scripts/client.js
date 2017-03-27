@@ -15,17 +15,21 @@ function getTasksFromDB(){
         $('#tasksTable').append('<tr></tr>');
             var $el = $('#tasksTable').children().last();
             // $el.append('<td>' + task.id + '</td>');
-            $el.append('<td>' + task.list_item + '</td>');
-            $el.append('<input type="checkbox" name="completeCheckbox" />');
-            // $el.append('<td>' + task.completed + '</td>');
             // if(task.completed === false){
-            //   $el.append('<button class = noCompleted>Not Complete</button>');
-            // } else  {
+            $el.append('<td>' + task.list_item + '</td>');
+            // $el.append('<input type="checkbox" name="completeCheckbox" />');
+            // $el.append('<td>' + task.completed + '</td>');
+            if(task.completed === false){
+            $el.append('<td><button class="completed" data-task='+
+                        task.id + '>Complete</button></td>');
+                        console.log(task.id);
+            } //else  {
             // $el.append('<button class = yesCompleted>Complete</button>');
             // }
             $el.append('<td><button class="delete" data-task='+
                       task.id + '>Delete</button></td>');
                       console.log(task.id);
+            // }
       }//end of for loop
     }
 
@@ -42,6 +46,7 @@ $(document).ready(function(){
 });//end document ready
 
 function addEventListeners() {
+//ON SUBMIT
   $('.todo').on('submit', function(event){
     event.preventDefault();
     console.log('we are here');
@@ -70,12 +75,36 @@ function addEventListeners() {
 
   });//end .on Submit
 
+//ON CLICK DELETE
   $('#tasksTable').on('click','.delete',function() {
     console.log('Delete Task:', $(this).data('task'));
+    var maybeDelete = confirm("Are you sure you want to delete?");
+    console.log(maybeDelete);
+    if(maybeDelete === true) {
+      $.ajax({
+        type: 'DELETE', //similar to SELECT
+        url: '/tasks/delete/' + $(this).data('task'),
+        success: function() {
+          getTasksFromDB();
+        }
+      });
+    }
+  });
+// , $this.data('task')
+//ON CLICK COMPLETE
+  $('#tasksTable').on("click",'.completed',function(){
+
+    var taskId = $(this).data('task');
+    console.log('Complete Task: ', taskId );
     $.ajax({
-      type: 'DELETE', //similar to SELECT
-      url: '/tasks/delete/' + $(this).data('task'),
-      success: function() {
+      type: "PUT",
+      url: '/tasks/update/' + taskId,
+      data: {
+        id: taskId,
+        completed: true,
+      },
+      success: function(){
+        console.log("update click log");
         getTasksFromDB();
       }
     });
