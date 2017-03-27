@@ -20,16 +20,31 @@ h3 {
   width: 500px;
 }
 
-th {
+.notDone {
   font-family: 'Lora', serif;
   font-size: 20px;
   color: #034bbf;
+}
+
+.done {
+  height: 1px;
+}
+
+tbody tr:nth-child(odd) {
+   background-color: #ccc;
 }
 
 tr {
   font-family: 'Montserrat', sans-serif;
   height: 40px;
   width: 150px;
+  border-color: #034bbf;
+  border-bottom: 2px;
+}
+
+table{
+  border-style: groove;
+  border-color: #034bbf;
 }
 
 body {

@@ -12,8 +12,10 @@ function getTasksFromDB(){
       for(var i = 0; i < response.length; i++){
         var task = response[i];
         console.log(response[i]);
+        if(task.completed === false){
         $('#tasksTable').append('<tr></tr>');
             var $el = $('#tasksTable').children().last();
+            console.log($el);
             // $el.append('<td>' + task.id + '</td>');
             // if(task.completed === false){
             $el.append('<td>' + task.list_item + '</td>');
@@ -29,6 +31,26 @@ function getTasksFromDB(){
             $el.append('<td><button class="delete" data-task='+
                       task.id + '>Delete</button></td>');
                       console.log(task.id);
+        } else {
+          $('#completedtasksTable').append('<tr></tr>');
+              var $el = $('#completedtasksTable').children().last();
+              console.log($el);
+              // $el.append('<td>' + task.id + '</td>');
+              // if(task.completed === false){
+              $el.append('<td>' + task.list_item + '</td>');
+              // $el.append('<input type="checkbox" name="completeCheckbox" />');
+              // $el.append('<td>' + task.completed + '</td>');
+              if(task.completed === false){
+              $el.append('<td><button class="completed" data-task='+
+                          task.id + '>Complete</button></td>');
+                          console.log(task.id);
+              } //else  {
+              // $el.append('<button class = yesCompleted>Complete</button>');
+              // }
+              $el.append('<td><button class="delete" data-task='+
+                        task.id + '>Delete</button></td>');
+                        console.log(task.id);
+        }
             // }
       }//end of for loop
     }
